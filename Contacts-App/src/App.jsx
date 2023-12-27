@@ -6,38 +6,26 @@ import { useEffect, useState } from 'react';
 import {
   collection,
   getDocs,
+  onSnapshot,
 } from 'firebase/firestore';
 import { db } from './config/firbase';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import ContactsCard from './components/ContactsCard';
 import Modal from './components/Modal';
 import AddContact from './components/addContact';
+import useDisclose from './hooks/useDisclose';
 function App() {
-  const [contacts, SetContacts] = useState(
-    []
-  );
-  const [isOpen, setIsOpen] =
-    useState(false);
-
-  const onOpen = () => {
-    setIsOpen(true);
-  };
-  const onClose = () => {
-    setIsOpen(false);
-  };
+  const [contacts, SetContacts] = useState([]);
+  const { isOpen, onClose, onOpen } = useDisclose();
 
   useEffect(() => {
     const getContacts = async () => {
       try {
-        const contactsRef = collection(
-          db,
-          'contacts'
-        );
-
-        const contactsSnapshot =
-          await getDocs(contactsRef);
-        const contactsList =
-          contactsSnapshot.docs.map(
+        const contactsRef = collection(db, 'contacts');
+        onSnapshot(contactsRef, (snapshot) => {
+          const contactsList = snapshot.docs.map(
             (doc) => {
               return {
                 id: doc.id,
@@ -45,13 +33,40 @@ function App() {
               };
             }
           );
-        SetContacts(contactsList);
+          SetContacts(contactsList);
+          return contactsList;
+        });
       } catch (error) {
         console.log(error);
       }
     };
+
     getContacts();
   }, []);
+
+  const filterContects = (e) => {
+    const value = e.target.value;
+    const contactsRef = collection(db, 'contacts');
+    onSnapshot(contactsRef, (snapshot) => {
+      const contactsList = snapshot.docs.map((doc) => {
+        return {
+          id: doc.id,
+          ...doc.data(),
+        };
+      });
+
+      const filterdContacts = contactsList.filter(
+        (contact) =>
+          contact.name
+            .toLowerCase()
+            .includes.toLowerCase()
+      );
+
+      SetContacts(filterdContacts);
+
+      return filterdContacts;
+    });
+  };
 
   return (
     <div className='max-w-[400px] mx-auto px-4'>
@@ -63,6 +78,7 @@ function App() {
             type='text'
             className='rounded-md border  text-white pl-9 bg-gray border-white bg-transparent h-10 flex-grow '
             placeholder='Search'
+            onChange={(e) => filterContects(e)}
           />
         </div>
 
@@ -79,11 +95,8 @@ function App() {
           />
         ))}
       </div>
-      <AddContact
-        setIsOpen={setIsOpen}
-        isOpen={isOpen}
-        onClose={onClose}
-      />
+      <AddContact isOpen={isOpen} onClose={onClose} />
+      <ToastContainer />
     </div>
   );
 }

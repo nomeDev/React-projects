@@ -4,13 +4,21 @@ import { Field, Form, Formik } from 'formik';
 import {
   addDoc,
   collection,
+  doc,
+  updateDoc,
 } from 'firebase/firestore';
 import { db } from '../config/firbase';
+import useDisclose from '../hooks/useDisclose';
+import { toast } from 'react-toastify';
+
 export default function AddContact({
   isOpen,
-  setIsOpen,
   onClose,
+  isUpdate,
+  contact,
 }) {
+  let { setIsOpen } = useDisclose();
+
   const addContact = async (contact) => {
     try {
       const contactRef = collection(
@@ -18,9 +26,36 @@ export default function AddContact({
         'contacts'
       );
       await addDoc(contactRef, contact);
+      onClose();
+      toast.success(
+        'Contact Added Successfully'
+      );
     } catch (error) {
       console.log(error);
     }
+    // window.location.reload();
+  };
+
+  const updateContact = async (
+    contact,
+    id
+  ) => {
+    try {
+      const contactRef = doc(
+        db,
+        'contacts',
+        id
+      );
+      await updateDoc(contactRef, contact);
+      onClose();
+      toast.success(
+        'Contact Updated Successfully'
+      );
+    } catch (error) {
+      console.log(error);
+    }
+    // window.location.reload();
+    console.log('updateed');
   };
 
   return (
@@ -29,14 +64,25 @@ export default function AddContact({
         isOpen={isOpen}
         onClose={onClose}>
         <Formik
-          initialValues={{
-            name: '',
-            email: '',
-          }}
+          initialValues={
+            isUpdate
+              ? {
+                  name: contact.name,
+                  email: contact.email,
+                }
+              : {
+                  name: '',
+                  email: '',
+                }
+          }
           onSubmit={(values) => {
-            addContact(values);
+            isUpdate
+              ? updateContact(
+                  values,
+                  contact.id
+                )
+              : addContact(values);
             setIsOpen(false);
-            window.location.reload();
           }}>
           <Form className='flex flex-col gap-1'>
             <div className='flex  flex-col gap-1'>
@@ -65,7 +111,8 @@ export default function AddContact({
             <button
               className='bg-orange mt-2 self-end px-3 py-1.5 border'
               type='submit'>
-              Add Contact
+              {isUpdate ? 'Update ' : 'Add '}
+              Contact
             </button>
           </Form>
         </Formik>
