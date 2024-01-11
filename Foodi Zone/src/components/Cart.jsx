@@ -24,7 +24,7 @@ export default function Cart() {
         className={`fixed bottom-20 p-2 sm:p-3 shadow-lg z-[10] cursor-pointer bg-white rounded-full  ${
           cartItems.length > 0 && 'anime'
         }`}>
-        <span className='absolute text-[12px] sm:text-sm top-0 right-0 sm:top-2 sm:right-2 w-5 sm:w-6 h-5 sm:w-6 flex items-center justify-center bg-orange-400 text-white text-sm rounded-xl px-1.5'>
+        <span className='absolute text-[12px] sm:text-sm top-0 right-0 sm:top-2 sm:right-2 w-5 sm:w-6 h-5 sm:h-6 flex items-center justify-center bg-orange-400 text-white text-sm rounded-xl px-1.5'>
           {totalQty}
         </span>
         <GrCart
