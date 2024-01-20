@@ -1,0 +1,97 @@
+main {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 550px;
+    width: 100%;
+    background: rgb(100, 99, 99);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    padding: 0 2px;
+}
+.container .myquiz {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid gray;
+}
+
+.question {
+    width: 100%;
+    padding: 10px 20px;
+    margin: 0;
+    box-sizing: border-box;
+    border-bottom: 2px solid white;
+    font-size: 20px;
+}
+.redio {
+    -webkit-transform: scale(2);
+    scale: 1.4;
+}
+
+.quizContainer {
+    width: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.quizContainer li {
+    font-size: 17px;
+    padding: 10px 5px;
+    border-bottom: 1px solid white;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.submit {
+    font-size: 18px;
+    padding: 10px 20px;
+    background: green;
+    border: none;
+    border-radius: 8px;
+    margin: 10px auto;
+}
+
+.score {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+}
+.reslut {
+    width: 100%;
+    padding: 8px 0;
+    text-align: center;
+}
+
+@media (max-width: 450px) {
+    .container {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+    .question {
+        padding: 5px;
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 380px) {
+    .container {
+        justify-content: space-around;
+    }
+    .question {
+        padding: 5px;
+        font-size: 18px;
+    }
+}
