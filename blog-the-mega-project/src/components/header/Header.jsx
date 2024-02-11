@@ -27,6 +27,11 @@ export default function Header() {
             slug: 'all-posts',
             active: authStatus,
         },
+        {
+            name: 'Add Post',
+            slug: '/add-post',
+            active: authStatus,
+        },
     ];
     return (
         <header className="py-3 shadow bg-gray-500 ">
