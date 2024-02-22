@@ -1,12 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Home.css';
-import { Sidebar } from '../../Components';
+import { Feed, Sidebar } from '../../Components';
 
 //
-export default function Home() {
+export default function Home({ sidebar }) {
+    const [category, setCategory] = useState(0);
+
+    //
     return (
         <>
-            <Sidebar />
+            <Sidebar
+                sidebar={sidebar}
+                category={category}
+                setCategory={setCategory}
+            />
+            <div
+                className={`container ${
+                    sidebar ? '' : 'large-container'
+                }`}>
+                <Feed category={category} />
+            </div>
         </>
     );
 }
