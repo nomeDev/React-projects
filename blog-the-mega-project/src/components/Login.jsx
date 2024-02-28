@@ -3,6 +3,7 @@ import { login as authLogin } from '../store/authSlice';
 import { Button, Input, Logo } from './index';
 import { useDispatch } from 'react-redux';
 import authService from '../appwrite/auth';
+import { useForm } from 'react-hook-form';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -79,7 +80,9 @@ function Login() {
                                 required: true,
                             })}
                         />
-                        <Button type="submit" className="w-full">
+                        <Button
+                            type="submit"
+                            className="w-full bg-blue-500">
                             Sign In
                         </Button>
                     </div>

@@ -4,7 +4,8 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { Input } from 'postcss';
+
+import { Logo, Button, Input } from './index';
 
 function Signup() {
     const navigate = useNavigate();
@@ -23,6 +24,7 @@ function Signup() {
             }
         } catch (error) {
             SetError(error.message);
+            console.log(error);
         }
     };
 
@@ -84,7 +86,9 @@ function Signup() {
                                 required: true,
                             })}
                         />
-                        <Button type="submit" className="w-full">
+                        <Button
+                            type="submit"
+                            className="w-full bg-blue-500">
                             Create Account
                         </Button>
                     </div>
