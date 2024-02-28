@@ -6,12 +6,12 @@ import { useParams } from 'react-router-dom';
 export default function Video() {
     const { videoId, categoryId } = useParams();
     useEffect(() => {
-        console.log('Vid=', videoId, '/', categoryId);
+        // console.log('Vid=', videoId, '/', categoryId);
     }, [videoId]);
     return (
         <div className="play-container">
             <PlayVideo videoId={videoId} categoryId={categoryId} />
-            <Recommended />
+            <Recommended categoryId={categoryId} />
         </div>
     );
 }

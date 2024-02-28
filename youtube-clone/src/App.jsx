@@ -3,17 +3,32 @@ import { Navbar } from './Components';
 import { Route, Routes, useParams } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import Video from './pages/Videos/Video';
+import SearchResult from './Components/SearchResult/SearchResult';
 
 function App() {
     const [sidebar, setSidebar] = useState(true);
+    const [searchData, setSearchData] = useState('');
+    const [isSearched, setIsSearched] = useState(false);
 
     return (
         <div>
-            <Navbar setSidebar={setSidebar} />
+            <Navbar
+                searchData={searchData}
+                setSearchData={setSearchData}
+                setSidebar={setSidebar}
+                isSearched={isSearched}
+                setIsSearched={setIsSearched}
+            />
             <Routes>
                 <Route
                     path="/"
-                    element={<Home sidebar={sidebar} />}
+                    element={
+                        <Home
+                            isSearched={isSearched}
+                            searchData={searchData}
+                            sidebar={sidebar}
+                        />
+                    }
                 />
                 <Route
                     path={`/video/:categoryId/:videoId`}
