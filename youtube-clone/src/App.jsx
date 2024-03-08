@@ -3,7 +3,7 @@ import { Navbar } from './Components';
 import { Route, Routes, useParams } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import Video from './pages/Videos/Video';
-import SearchResult from './Components/SearchResult/SearchResult';
+import SearchResult from './pages/SearchResult/SearchResult';
 
 function App() {
     const [sidebar, setSidebar] = useState(true);
@@ -33,6 +33,16 @@ function App() {
                 <Route
                     path={`/video/:categoryId/:videoId`}
                     element={<Video />}
+                />
+                <Route
+                    path="/search"
+                    element={
+                        <SearchResult
+                            isSearched={isSearched}
+                            sidebar={sidebar}
+                            searchData={searchData}
+                        />
+                    }
                 />
             </Routes>
         </div>

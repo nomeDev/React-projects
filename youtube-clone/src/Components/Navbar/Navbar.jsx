@@ -8,7 +8,7 @@ import upload_icon from '../../assets/upload.png';
 import more_icon from '../../assets/more.png';
 import notification_icon from '../../assets/notification.png';
 import profile_icon from '../../assets/jack.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 //
 const Navbar = ({
@@ -18,7 +18,7 @@ const Navbar = ({
     isSearched,
     setIsSearched,
 }) => {
-    // console.log(searchData);
+    const navigate = useNavigate();
     return (
         <nav className="flex-div">
             <div className="nav-left flex-div">
@@ -27,30 +27,45 @@ const Navbar = ({
                     src={menu_icon}
                     onClick={() => setSidebar((prev) => !prev)}
                 />
-                <Link to="/">
+                <Link to="/" onClick={() => isSearched(false)}>
                     <img className="logo" src={logo} />
                 </Link>
             </div>
 
             <div className="nav-middle flex-div">
-                <div className="search-box flex-div">
-                    <input
-                        onChange={(e) =>
-                            setSearchData(e.target.value)
-                        }
-                        value={searchData}
-                        type="text"
-                        placeholder="Search"
-                    />
-                    <img
-                        src={!isSearched ? search_icon : close_icon}
-                        onClick={() => {
-                            setIsSearched((prev) => !prev);
-                            isSearched ? setSearchData('') : null;
-                        }}
-                        alt=""
-                    />
-                </div>
+                <form
+                    onSubmit={(e) => {
+                        e.preventDefault();
+                        setIsSearched((prev) => !prev);
+                        navigate('/search');
+                    }}>
+                    <div className="search-box flex-div">
+                        <input
+                            onChange={(e) =>
+                                setSearchData(e.target.value)
+                            }
+                            value={searchData}
+                            type="text"
+                            placeholder="Search"
+                        />
+                        <Link to={!isSearched && '/search'}>
+                            <img
+                                src={
+                                    !isSearched
+                                        ? search_icon
+                                        : close_icon
+                                }
+                                onClick={() => {
+                                    setIsSearched((prev) => !prev);
+                                    isSearched
+                                        ? setSearchData('')
+                                        : null;
+                                }}
+                                alt=""
+                            />
+                        </Link>
+                    </div>
+                </form>
             </div>
             <div className="nav-right flex-div">
                 <img src={upload_icon} alt="" />

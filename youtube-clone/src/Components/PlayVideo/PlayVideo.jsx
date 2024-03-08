@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import './PlayVideo.css';
-import video1 from '../../assets/video.mp4';
 import like from '../../assets/like.png';
 import dislike from '../../assets/dislike.png';
 import share from '../../assets/share.png';
 import save from '../../assets/save.png';
-import jack from '../../assets/jack.png';
-import user_profile from '../../assets/user_profile.jpg';
+import down from '../../assets/down.png';
 import { API_KEY, value_converter } from '../../data/data';
 import moment from 'moment';
 import { useParams } from 'react-router-dom';
 //
-export default function PlayVideo({ videoId }) {
-    // const { videoId } = useParams();
+export default function PlayVideo({}) {
+    const { videoId } = useParams();
 
     const [apiData, setApiData] = useState(null);
     const [channelData, setChannelData] = useState(null);
     const [commentsData, setCommentData] = useState([]);
+    const [commentMinimize, setCommentMinimize] = useState(true);
     //
     const fetchVideosData = async () => {
         const videoDetails_url = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${videoId}&key=${API_KEY}`;
@@ -48,22 +47,15 @@ export default function PlayVideo({ videoId }) {
             .then((data) => setCommentData(data.items))
             .catch((e) => console.log(e));
     };
-    //
-    //
 
     //
     useEffect(() => {
         fetchVideosData();
-    }, []);
+    }, [videoId]);
     useEffect(() => {
         getChannelData();
         getCommentsData();
-    }, [videoId]);
-
-    // getChannelData();
-    // getCommentsData();
-    // console.log('video id = ', videoId);
-    // console.log(apiData);
+    }, [apiData]);
 
     return (
         <div className="play-video">
@@ -132,57 +124,74 @@ export default function PlayVideo({ videoId }) {
                         apiData.snippet.description.slice(0, 200)}
                 </p>
                 <hr />
-                <h4>
-                    {value_converter(
-                        apiData && apiData.statistics.commentCount
-                    )}{' '}
-                    comments
-                </h4>
-                {commentsData &&
-                    commentsData.map((item) => (
-                        <div className="comment" key={item.id}>
-                            <img
-                                src={`
+                <div
+                    className={`comments ${
+                        commentMinimize ? 'minimize' : ''
+                    }`}>
+                    <h4>
+                        {value_converter(
+                            apiData && apiData.statistics.commentCount
+                        )}{' '}
+                        comments
+                        <img
+                            src={down}
+                            onClick={() =>
+                                setCommentMinimize((prev) => !prev)
+                            }
+                            className="down"
+                        />
+                    </h4>
+                    {commentsData &&
+                        commentsData.map((item) => (
+                            <div className="comment" key={item.id}>
+                                <img
+                                    src={`
                                     ${item.snippet.topLevelComment.snippet.authorProfileImageUrl}
                                 `}
-                                alt="DP"
-                            />
-                            <div className="">
-                                <h3>
-                                    {
-                                        item.snippet.topLevelComment
-                                            .snippet.autherDisplayName
-                                    }{' '}
-                                    <span>
-                                        {moment(
+                                    alt="DP"
+                                />
+                                <div className="">
+                                    <h3>
+                                        {
                                             item.snippet
                                                 .topLevelComment
-                                                .snippet.publishedAt
-                                        ).fromNow()}
-                                    </span>
-                                </h3>
-                                <p>
-                                    {
-                                        item.snippet.topLevelComment
-                                            .snippet.textDisplay
-                                    }
-                                </p>
-                                <div className="comment-action">
-                                    <img src={like} alt="" />{' '}
-                                    <span>
-                                        {commentsData &&
-                                            value_converter(
+                                                .snippet
+                                                .autherDisplayName
+                                        }{' '}
+                                        <span>
+                                            {moment(
                                                 item.snippet
                                                     .topLevelComment
-                                                    .snippet.likeCount
-                                            )}
-                                    </span>
-                                    <img src={dislike} alt="" />{' '}
+                                                    .snippet
+                                                    .publishedAt
+                                            ).fromNow()}
+                                        </span>
+                                    </h3>
+                                    <p>
+                                        {
+                                            item.snippet
+                                                .topLevelComment
+                                                .snippet.textDisplay
+                                        }
+                                    </p>
+                                    <div className="comment-action">
+                                        <img src={like} alt="" />{' '}
+                                        <span>
+                                            {commentsData &&
+                                                value_converter(
+                                                    item.snippet
+                                                        .topLevelComment
+                                                        .snippet
+                                                        .likeCount
+                                                )}
+                                        </span>
+                                        <img src={dislike} alt="" />{' '}
+                                    </div>
                                 </div>
+                                <hr />
                             </div>
-                            <hr />
-                        </div>
-                    ))}
+                        ))}
+                </div>
             </div>
         </div>
     );
