@@ -1,12 +1,13 @@
 import React from 'react';
-import { LandingPage, Navbar } from './components/index';
+import { LandingPage, Marquee, Navbar } from './components/index';
 
 function App() {
     return (
         <div>
-            <div className="w-full h-screen bg-zinc-300 text-white">
+            <div className="w-full  min-h-screen bg-zinc-800   text-white">
                 <Navbar />
                 <LandingPage />
+                <Marquee />
             </div>
         </div>
     );
