@@ -24,7 +24,7 @@ export class Service {
     }) {
         try {
             return await this.databases.createDocument(
-                conf.projectId,
+                conf.databaseId,
                 conf.collectionId,
                 slug,
                 {
