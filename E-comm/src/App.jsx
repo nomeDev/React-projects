@@ -6,7 +6,7 @@ import Newsletter from './components/Newsletter/Newsletter.jsx';
 function App() {
     return (
         <>
-            <div className="w-full min-h-[100vh] bg-zinc-500">
+            <div className="w-full max-w-[] mx-auto min-h-[100vh] bg-zinc-500">
                 <Header />
                 <main>
                     <Outlet />
