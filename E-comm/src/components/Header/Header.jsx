@@ -30,13 +30,13 @@ export default function Header() {
 
     return (
         <div className="w-full border-b-2 bg-zinc-800 border-black text-white">
-            <header className="w-full max-w-[1400px] mx-auto flex items-center justify-between px-3 py-3 md:px-10 md:py-5  z-10  relative">
+            <header className="w-full max-w-[1400px] bg-zinc-800 mx-auto flex items-center justify-between px-3 py-3 md:px-10 md:py-5  z-10  relative">
                 <div className="logo font-bold text-xl sm:text-3xl lg:text-4xl">
                     NOMI <span className="font-normal">SHOP</span>
                 </div>
                 <nav>
                     <ul
-                        className={`hidden sm:flex items-center  pb-0 border-b-2 border-black sm:border-0 sm:p-0   sm:w-auto sm:gap-4  sm:static   md:gap-5 lg:gap-11 text-[18px] z-0 duration-150 sm:translate-y-0  ${
+                        className={`hidden sm:flex items-center  pb-0 border-b-2 border-black sm:border-0 sm:p-0 sm:w-auto sm:gap-4  sm:static   md:gap-5 lg:gap-11 text-[18px] z-0 duration-150 sm:translate-y-0  ${
                             isMenuOpen
                                 ? 'top-12 opacity-100'
                                 : 'translate-y-[-100%] opacity-'
@@ -61,17 +61,7 @@ export default function Header() {
                         ))}
                     </ul>
                 </nav>
-                <button
-                    onClick={() => setIsMenuOpen(!isMenuOpen)}
-                    className="flex sm:hidden items-center ">
-                    Menu{' '}
-                    <span
-                        className={`text-xl1 ease duration-100 ${
-                            isMenuOpen ? 'rotate-180' : 'rotate-0'
-                        }`}>
-                        <IoIosArrowDown />{' '}
-                    </span>
-                </button>
+
                 <div className="icons flex text-[28px] gap-7 justify-end w-auto md:w-[25%] ">
                     <IoSearch className="cursor-pointer md:block hidden" />
                     <div className="relative">
@@ -88,24 +78,37 @@ export default function Header() {
                         </span>
                     </div>
                 </div>
+                <button
+                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    className="flex sm:hidden items-center ">
+                    Menu{' '}
+                    <span
+                        className={`text-xl1 ease duration-100 ${
+                            isMenuOpen ? 'rotate-180' : 'rotate-0'
+                        }`}>
+                        <IoIosArrowDown />{' '}
+                    </span>
+                </button>
             </header>
             <div
-                className={` menu overflow-hidden absolute top-0 left-0 w-full min-h-[calc(100vh)] bg-yellow-300 ${
-                    isMenuOpen ? 'block sm:hidden' : 'hidden'
+                className={`menu overflow-hidden absolute -top-[100%] left-0 w-full h-[100vh] z-0 bg-zinc-700 duration-200 ${
+                    isMenuOpen
+                        ? 'block top-[0%] sm:hidden'
+                        : '-top-[100%]'
                 } `}>
                 <ul
-                    className={`menu flex w-full sm:hidden flex-col  items-center  pb-0 border-b-2 border-black sm:border-0    sm:w-auto   absolute top-12 left-[50%] -translate-x-[50%] sm:translate-x-0 sm:static bg-amber-200  text-[18px] z-0 duration-150 sm:translate-y-0  ${
+                    className={`menu flex w-full sm:hidden flex-col  items-center text-center py-3  pb-0 border-b-2 border-black sm:border-0    sm:w-auto   absolute top-12 left-[50%] -translate-x-[50%] sm:translate-x-0 sm:static   text-[20px] z-0 duration-150 sm:translate-y-0  ${
                         isMenuOpen
                             ? 'top-12 opacity-100'
-                            : 'translate-y-[-100%] opacity-'
+                            : 'translate-y-[-100vh] opacity-'
                     }`}>
                     {navItems.map((item, i) => (
                         <NavLink
                             className={({ isActive }) => `
                                     ${
                                         isActive
-                                            ? 'text-red-500'
-                                            : 'text-black'
+                                            ? 'text-red-300'
+                                            : 'text-blue-100'
                                     } 
                                        w-full  p-3  hover:underline underline-offset-4   ${
                                            i === 2
