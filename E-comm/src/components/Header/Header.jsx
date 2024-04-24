@@ -98,7 +98,7 @@ export default function Header() {
                         : '-top-[100%]'
                 } `}>
                 <ul
-                    className={`menu flex w-full sm:hidden flex-col  items-center text-center py-3  pb-0 border-b-2 border-black sm:border-0    sm:w-auto  sm:translate-x-0 sm:static   text-[20px] z-0 duration-150 sm:translate-y-0  ${
+                    className={`menu flex w-full sm:hidden flex-col  items-center text-center py-3  pb-0 border-b-2 border-black sm:border-0 sm:w-auto  sm:translate-x-0 sm:static   text-[16px] z-0 duration-150 sm:translate-y-0  ${
                         isMenuOpen
                             ? 'top-12 opacity-100'
                             : 'translate-y-[-100vh] opacity-'
@@ -128,7 +128,6 @@ export default function Header() {
                         <li className="hover:bg-zinc-700 cursor-pointer grow p-3 flex justify-center">
                             <IoSearch className="" />{' '}
                         </li>
-
                         <li className="hover:bg-zinc-700 relative cursor-pointer xsm:hidden flex grow p-3  justify-center">
                             <MdOutlineShoppingCart className="" />{' '}
                             <span className="absolute top-[10px] right-[10px] xsm:right-[20px] w-[20px] h-[20px]  rounded-full text-white text-[14px] text-center leading-[18px]">
@@ -137,9 +136,7 @@ export default function Header() {
                         </li>
                         <li className="hover:bg-zinc-700 relative cursor-pointer grow p-3 flex justify-center">
                             <FaRegHeart className="" />{' '}
-                            <span className="absolute top-[10px] right-[10px] xsm:right-[20px]  w-[20px] h-[20px] rounded-full text-white text-[14px] text-center leading-[18px]">
-                                0
-                            </span>
+                            <span className="absolute top-[10px] right-[10px] xsm:right-[20px]  w-[20px] h-[20px] rounded-full text-white text-[14px] text-center leading-[18px]"></span>
                         </li>
                     </div>
                 </ul>
