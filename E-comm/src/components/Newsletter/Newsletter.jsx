@@ -9,18 +9,18 @@ export default function Newsletter() {
     <div>
       <div
         className={`w-full min-h-[40vh] bg-gray-400 bg-[url(./images/newsletter-bg.jpeg)] bg-center bg-cover flex items-center justify-center`}>
-        <div className="container w-full text-center">
+        <div className="container w-full text-center py-7 sm:py-0">
           <p className="text-zinc-800">NEWSLETTER</p>
-          <h3 className="text-xl md:text-2xl font-bold my-3">
+          <h3 className="text-lg md:text-2xl font-bold my-3">
             SIGN UP FOR LATEST UPDATES AND OFFERS
           </h3>
           <div className="input">
             <input
-              className="px-2 py-[3.4px] border-[1px] border-gray-300 outline-none w-[250px] "
+              className="px-2 py-[3.4px] border-[1px] border-gray-300 outline-none w-[90%]  sm:w-[250px] "
               placeholder="Email Address"
               type="text"
             />
-            <button className="bg-purple-600 text-white px-3 py-1 border-[1] border-purple-500 h-full">
+            <button className="bg-purple-600 text-white px-3 py-1 my-2 sm:my-0 border-[1] border-purple-500 h-full">
               Subscribe
             </button>
           </div>
