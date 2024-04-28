@@ -9,7 +9,7 @@ export default function Newsletter() {
     <div>
       <div
         className={`w-full min-h-[40vh] bg-gray-400 bg-[url(./images/newsletter-bg.jpeg)] bg-center bg-cover flex items-center justify-center`}>
-        <div className="container w-full text-center py-7 sm:py-0">
+        <div className="container w-full text-center py-7 sm:py-2">
           <p className="text-zinc-800">NEWSLETTER</p>
           <h3 className="text-lg md:text-2xl font-bold my-3">
             SIGN UP FOR LATEST UPDATES AND OFFERS

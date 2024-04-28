@@ -1,9 +1,10 @@
 import React from "react";
 import Banner from "../../components/Banner/Banner";
+import Category from "../../components/Category/Category";
 
 export default function Home() {
   return (
-    <div className="text-3xl h-fit w-full bg-red-300">
+    <div className="h-fit w-full">
       <Banner />
       <Category />
     </div>
