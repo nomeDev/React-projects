@@ -5,10 +5,12 @@ import Products from "../../components/Products/Products";
 
 export default function Home() {
   return (
-    <div className="h-fit w-full max-w-[1200px] mx-auto">
+    <div className="h-fit w-full max-w-[00x] mx-auto">
       <Banner />
-      <Category />
-      <Products />
+      <div className="max-w-[1200px] w-full mx-auto">
+        <Category />
+        <Products />
+      </div>
     </div>
   );
 }
