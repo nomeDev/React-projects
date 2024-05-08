@@ -1,9 +1,10 @@
-import React from 'react';
+import React from "react";
+import Products from "../../components/Products/Products";
 
 export default function Category() {
-    return (
-        <div>
-            <h1 className="text-3xl">Category</h1>
-        </div>
-    );
+  return (
+    <div className="pt-2">
+      <Products title="Specific Products" />
+    </div>
+  );
 }

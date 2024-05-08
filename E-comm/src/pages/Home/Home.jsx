@@ -9,7 +9,7 @@ export default function Home() {
       <Banner />
       <div className="max-w-[1200px] w-full mx-auto">
         <Category />
-        <Products />
+        <Products title={"Popular products"} />
       </div>
     </div>
   );
